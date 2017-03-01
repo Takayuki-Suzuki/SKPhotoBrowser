@@ -138,12 +138,7 @@ open class SKPhotoBrowser: UIViewController, SKZoomingScrollViewTapDelegate {
         isPerformingLayout = true
         
         pagingScrollView.updateFrame(view.bounds, currentPageIndex: currentPageIndex)
-        
-        if let page = pagingScrollView.pageDisplayedAtIndex(currentPageIndex){
-            page.tapDelegate = self
-        }
-        
-        
+
         toolbar.frame = frameForToolbarAtOrientation()
         
         // where did start
