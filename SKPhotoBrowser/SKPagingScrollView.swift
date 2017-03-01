@@ -142,6 +142,7 @@ class SKPagingScrollView: UIScrollView {
             page.frame = frameForPageAtIndex(index)
             page.tag = index + pageIndexTagOffset
             page.photo = browser.photos[index]
+            page.tapDelegate = self.browser
             
             visiblePages.append(page)
             addSubview(page)
