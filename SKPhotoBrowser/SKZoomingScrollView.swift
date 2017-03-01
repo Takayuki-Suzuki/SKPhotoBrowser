@@ -8,8 +8,8 @@
 
 import UIKit
 
-@objc public protocol SKZoomingScrollViewDelegate {
-    optional func didSingleTap(_ view: UIView, touch: UITouch)
+public protocol SKZoomingScrollViewTapDelegate {
+    func didSingleTap(_ touchPoint: CGPoint)
 }
 
 open class SKZoomingScrollView: UIScrollView {
@@ -31,7 +31,7 @@ open class SKZoomingScrollView: UIScrollView {
     fileprivate var tapView: SKDetectingView!
     fileprivate var indicatorView: SKIndicatorView!
     
-    public weak var delegate: SKZoomingScrollViewDelegate?
+    open var tapDelegate: SKZoomingScrollViewTapDelegate?
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -272,7 +272,6 @@ extension SKZoomingScrollView: SKDetectingViewDelegate {
         } else {
             browser.toggleControls()
         }
-        delegate?.didSingleTap(view, touch: touch)
     }
     
     func handleDoubleTap(_ view: UIView, touch: UITouch) {
@@ -296,7 +295,7 @@ extension SKZoomingScrollView: SKDetectingImageViewDelegate {
         } else {
             browser.toggleControls()
         }
-        delegate?.didSingleTap(view, touch: touch)
+        tapDelegate?.didSingleTap(touchPoint)
     }
     
     func handleImageViewDoubleTap(_ touchPoint: CGPoint) {
