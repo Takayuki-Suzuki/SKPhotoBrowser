@@ -11,7 +11,7 @@ import UIKit
 public let SKPHOTO_LOADING_DID_END_NOTIFICATION = "photoLoadingDidEndNotification"
 
 // MARK: - SKPhotoBrowser
-open class SKPhotoBrowser: UIViewController {
+open class SKPhotoBrowser: UIViewController, SKZoomingScrollViewTapDelegate {
     
     let pageIndexTagOffset: Int = 1000
     
@@ -139,6 +139,11 @@ open class SKPhotoBrowser: UIViewController {
         
         pagingScrollView.updateFrame(view.bounds, currentPageIndex: currentPageIndex)
         
+        if let page = pagingScrollView.pageDisplayedAtIndex(currentPageIndex){
+            page.tapDelegate = self
+        }
+        
+        
         toolbar.frame = frameForToolbarAtOrientation()
         
         // where did start
@@ -228,6 +233,10 @@ open class SKPhotoBrowser: UIViewController {
     open func determineAndClose() {
         delegate?.willDismissAtPageIndex?(currentPageIndex)
         animator.willDismiss(self)
+    }
+    
+    public func didSingleTap(_ touchPoint: CGPoint) {
+        delegate?.didTapPhotoInBrowser?(touchPoint)
     }
 }
 
