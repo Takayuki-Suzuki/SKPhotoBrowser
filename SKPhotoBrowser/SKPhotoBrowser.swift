@@ -150,7 +150,7 @@ open class SKPhotoBrowser: UIViewController, SKZoomingScrollViewTapDelegate {
     override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         isViewActive = true
-
+        isEndAnimationByToolBar = true
     }
     
     override open var prefersStatusBarHidden: Bool {
